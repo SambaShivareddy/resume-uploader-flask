@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Uploader</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+</head>
+<body>
+    <div class="upload-wrapper">
+        <div class="upload-box">
+            <h1>Upload Your Resume</h1>
+            <p class="subtitle">Choose a PDF Resume</p>
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file-upload" class="custom-file-upload">
+                        <span>Select PDF</span>
+                        <input id="file-upload" type="file" name="pdf" accept="application/pdf" required onchange="showFileName(this)">
+                    </label>
+                    <p id="file-name" class="file-name-display"></p>
+                    <button type="submit">Upload & Extract</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function showFileName(input) {
+            const fileName = input.files[0]?.name || "";
+            document.getElementById("file-name").textContent = fileName;
+        }
+    </script>
+    
+    
+</body>
+</html>

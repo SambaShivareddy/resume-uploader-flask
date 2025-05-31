@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Extracted</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <div class="container">
+
+
+
+
+        <h1>Extracted Resume Details</h1>
+
+        {% set tech_split = extracted.split('TECHNOLOGIES') %}
+        {% set work_split = extracted.split('WORK EXPERIENCE') %}
+        {% set project_split = extracted.split('PROJECTS') %}
+        {% set education_split = extracted.split('EDUCATION') %}
+        {% set achievement_split = extracted.split('ACHIEVEMENTS') %}
+        {% set extra_split = extracted.split('EXTRA-CURRICULAR') %}
+
+        <div class="section">
+            <h2>Basic Info</h2>
+            <pre>{{ tech_split[0] }}</pre>
+        </div>
+
+        {% if tech_split | length > 1 %}
+        <div class="section">
+            <h2>Technologies</h2>
+            <pre>{{ tech_split[1].split('WORK EXPERIENCE')[0] }}</pre>
+        </div>
+        {% endif %}
+
+        {% if work_split | length > 1 %}
+        <div class="section">
+            <h2>Work Experience</h2>
+            <pre>{{ work_split[1].split('PROJECTS')[0] }}</pre>
+        </div>
+        {% endif %}
+
+        {% if project_split | length > 1 %}
+        <div class="section">
+            <h2>Projects</h2>
+            <pre>{{ project_split[1].split('EDUCATION')[0] }}</pre>
+        </div>
+        {% endif %}
+
+        {% if education_split | length > 1 %}
+        <div class="section">
+            <h2>Education</h2>
+            <pre>{{ education_split[1].split('ACHIEVEMENTS')[0] }}</pre>
+        </div>
+        {% endif %}
+
+        {% if achievement_split | length > 1 %}
+        <div class="section">
+            <h2>Achievements</h2>
+            <pre>{{ achievement_split[1].split('EXTRA-CURRICULAR')[0] }}</pre>
+        </div>
+        {% endif %}
+
+        {% if extra_split | length > 1 %}
+        <div class="section">
+            <h2>Extra-Curricular</h2>
+            <pre>{{ extra_split[1] }}</pre>
+        </div>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="back-link">← Back to Upload</a>
+    </div>
+</body>
+</html>
